@@ -2,32 +2,33 @@
  <div class="row"> 
   <h1> inicio </h1>
   <div class="col">
-    <div class="contenido">
+    <div *ngFor="let i of info" class="contenido" >
+      <mat-card class="example-card">
+
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{i.nombre}}</mat-card-title>
+          <mat-card-subtitle>{{i.raza}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image  alt="riquelme" width="10%">
+        <mat-card-content> {{i.imagen}}
+          <p> 
+           Polentelme... la raza de perro mas fria que existe en el planeta, puede encontrarse en el norte de rusia y en los polos: norte y sur.
+          </p>
+        </mat-card-content>
+    
+    
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
 
 
     </div>
   </div>
  
-  <mat-card class="example-card">
-
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title></mat-card-title>
-      <mat-card-subtitle></mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image src="" alt="riquelme" width="10%">
-    <mat-card-content>
-      <p> 
-       Polentelme... la raza de perro mas fria que existe en el planeta, puede encontrarse en el norte de rusia y en los polos: norte y sur.
-      </p>
-    </mat-card-content>
-
-
-    <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
-    </mat-card-actions>
-  </mat-card>
+  
 
 </div>
 </div> 

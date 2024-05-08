@@ -6,6 +6,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { CardComponent } from './components/card/card.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import {MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {MatCardModule} from '@angular/material/card';
     CommonModule,
     InicioRoutingModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   exports: [
     MatButtonModule,

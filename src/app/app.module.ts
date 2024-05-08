@@ -3,21 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InicioComponent } from './inicio/inicio.component';
-import { SharedModule } from './modules/shared/components/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './modules/shared/shared.module';
+import { PruebaComponent } from './shared/components/prueba/prueba.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent,
+    PruebaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
