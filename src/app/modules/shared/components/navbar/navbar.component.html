@@ -6,15 +6,24 @@
   <button mat-button routerLink="/inicio">inicio</button>
   <!--botones con iconos-->
   <!-- productos -->
-  <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+  <button mat-button [matMenuTriggerFor]="usuario">productos</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerlink="/productos">general</button>
+    <button mat-menu-item routerlink="/usuario">productos</button>
     <button mat-menu-item routerlink="/alimento">alimento</button>
     <button mat-menu-item routerlink="/juguete">juguete</button>
     <button mat-menu-item routerlink="/indumentaria">indumentaria</button>
   </mat-menu>
 
   <span class="example-spacer"></span>
+<!-- inicio de sesion y el registro de un nuevo usuario-->
+  <button mat-button [matMenuTriggerFor]="usuario">Menu</button>
+  <mat-menu #usuario="matMenu">
+    <button mat-menu-item routerlink="/">registrarse</button>
+    <button mat-menu-item routerlink="/">iniciar sesion</button>
+   
+  </mat-menu>
+
+  <!-- carrito -->
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
   </button>

@@ -5,13 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './modules/shared/shared.module';
-import { PruebaComponent } from './shared/components/prueba/prueba.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PruebaComponent,
   ],
   imports: [
     BrowserModule,
