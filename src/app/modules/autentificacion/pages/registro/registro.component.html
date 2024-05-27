@@ -1,1 +1,33 @@
-<p>registro works!</p>
+<div class ="container">
+    <div class="row">
+        <h1> registrarse</h1>
+        <i class="material-icons" style="font-size: 200px;"> person </i>
+        <!-- nombre de usuario -->
+        <mat-form-field appearance="fill">
+            <mat-label>introducir nombre de usuario</mat-label>
+            <input matInput placeholder="oscarcito2009">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+
+
+        <!-- appellido del usuario.-->
+        <mat-form-field appearance="fill">
+            <mat-label>introducir su appellido</mat-label>
+            <input matInput placeholder="ej: ruggeri">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>  
+          </mat-form-field>
+        
+        <!-- contraseña de usuario -->
+          <mat-form-field>
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'"#input minlenght="6" required>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-hint align="start"> minimo:6/{{input.value.length}} </mat-hint>
+          </mat-form-field>
+
+          <!-- boton para enviar la informacion a la base de datos -->
+        <button class="button" mat-raised-button color="primary"> registar </button>
+        </div>
+</div>
