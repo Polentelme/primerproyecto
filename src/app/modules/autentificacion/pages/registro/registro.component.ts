@@ -5,7 +5,12 @@ import { Usuario } from 'src/app/models/usuario';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent {    }
+export class RegistroComponent {
+registrar() {
+throw new Error('Method not implemented.');
+}
+usuarios: any;
+}
 // input de la contraseña para ver los caracteres o no
   export  class FormFieldPrefixSuffixExample {
     hide = true;
@@ -38,10 +43,18 @@ export class RegistroComponent {    }
 
       
       console.log(credenciales)
-      console.log (this.coleccionusuarios
+      console.log (this.coleccionusuarios.pushcredenciales
       )
     }
+    limpiarinputs(){ 
+      const inputs = {
+      uid: this.usuarios.uid ='',
+      nombre: this.usuarios.nombre='',
+      apellido: this.usuarios.apellido='',
+      email: this.usuarios.email='',
+      rol: this.usuarios.rol='',
+      password: this.usuarios.password='',
+      }
 }
 
-
-
+}
