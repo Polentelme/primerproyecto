@@ -27,3 +27,7 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('.content span')?.textContent).toContain('NEWPROYECT1 app is running!');
   });
 });
+
+function expect(title: any) {
+  throw new Error('Function not implemented.');
+}

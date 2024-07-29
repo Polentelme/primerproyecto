@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
+import { FirestoreService } from 'src/app/modules/shared/services/firestore.service';
+import { Router} from '@angular/router';
+import * as CryptoJS from 'crypto-js'; 
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -55,6 +59,13 @@ usuarios: any;
       rol: this.usuarios.rol='',
       password: this.usuarios.password='',
       }
+
+      const res = await this.servicioAuth.registrar(credenciales.email, credenciales.password)
+      Swal.fire({
+        title: "felicidades",
+        text: "se ha registrado correctamente",
+        icon: "success"
+      })
 }
 
 }
