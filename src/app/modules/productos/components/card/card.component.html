@@ -1,0 +1,15 @@
+<!-- Card para mostrar TODOS los productos que el admin ingrese a la base de datos-->
+<div class="contenido" *ngFor="let producto of coleccionProductos"> 
+ <div class="card" style="width: 18rem;">
+    <img src="{{producto.imagen}}" class= "card-img-top" alt="{{producto.alt}}"
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+      <button type="button" class="btn btn-outline-primary" 
+      data-bs-toggle="modal" data-bs-target="#vermas" (click)="mostrarver(producto)">   Ver mas </button> 
+    </div>
+  </div>
+</div>
