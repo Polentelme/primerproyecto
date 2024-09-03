@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
+import { CrudService } from 'src/app/modules/admin/services/crud.service';
 
 @Component({
   selector: 'app-card',
@@ -7,16 +8,38 @@ import { Producto } from 'src/app/models/producto';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  //definimos coleccion de productos locales
-  coleccionProductos: Producto [] = [];
+  // Definimos colección de productos locales
+  coleccionProductos: Producto[] = [];
 
-  //variable local para seleccionar un producto especifico 
+  // Variable local para seleccionar un producto específico
   productoSeleccionado!: Producto;
 
-  //variable local para manejar estado de un modal
+  // Variable local para manejar estado de un modal
   modalVisible: boolean = false;
 
-  constructor( public servicioCrud: CrudService) {}
+//directivas para comunicarse con el componente padre
+@Input() productoReciente: string ='';
 
-  ngOnInit(): void 
+@Output() productoAgregado = new EventEmitter<Producto>();
+
+  constructor(public servicioCrud: CrudService){}
+
+  ngOnInit(): void{
+    this.servicioCrud.obtenerProducto().subscribe(producto => {
+      this.coleccionProductos = producto;
+    })
+  }
+
+  // Función para mostrar más información de los productos
+  mostrarVer(info: Producto){
+    // Cambio estado del modal a true (ahora es visible)
+    this.modalVisible = true;
+
+    // Guardo en variable seleccionado la información de producto elegido
+    this.productoSeleccionado = info;
+  }
+
+  agregarProducto(info: Producto){
+    this.productoAgregado.emit(info);  
+  }
 }
