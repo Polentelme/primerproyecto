@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { assertInInjectionContext, Component } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
-import { CrudService } from '../../services/crud.service';
+import { CrudService } from '../../service/crud.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { race } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -42,7 +43,7 @@ export class TableComponent {
   async agregarProducto() {
     if (this.producto.valid) {
       let nuevoProducto: Producto = {
-        idProducto: '',
+        Idproducto: '',
         nombre: this.producto.value.nombre!,
         precio: this.producto.value.precio!,
         descripcion: this.producto.value.descripcion!,
@@ -51,6 +52,16 @@ export class TableComponent {
         alt: this.producto.value.alt!
       }
 
+      //enviamos nombre y url de la imagen; definimos carpeta de imagenes como "produccion"
+      await this.servicioCrud.subirImagen(this.nombreImagen, this.imagen, "productos")
+      .then(resp => { 
+        //encapsulamos respuesta y enviamos la informacion obtenida
+        this.servicioCrud.obtenerUrlImagen(resp)
+        .then(url => {
+
+        })
+
+      })
       await this.servicioCrud.crearProducto(nuevoProducto)
         .then(producto => {
           alert("Ha agregado un nuevo producto con éxito.");
@@ -58,6 +69,30 @@ export class TableComponent {
         .catch(error => {
           alert("Ha ocurrido un error al cargar un producto.");
         })
+    }
+  }
+
+  // cargar imagenes
+  cargarImagen(event: any){
+    // variable para obtener el archivo subido desde el input del HTML
+    let archivo = event.target.files[0];
+   // variable para crear un nuevo objeto de tipo "archivo" o "file" y leerlo
+    let reader = new FileReader();
+
+    if (archivo != undefined) {
+      // llamami
+      reader.readAsDataURL(archivo);
+
+      reader.onloadend = () => {
+        let url = reader.result;5
+
+        if(url !=null ){
+          this.nombreImagen = archivo.name;
+
+          this.imagen = url.toString();
+
+        }
+      }
     }
   }
 
