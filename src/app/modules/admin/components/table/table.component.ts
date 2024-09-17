@@ -104,7 +104,12 @@ export class TableComponent {
   }
 
   borrarProducto(){
-    this.servicioCrud.eliminarProducto(this.productoSeleccionado.idProducto)
+    /*
+    ahora enviamos tanto el ID del producto (para identificarlo en firestore) 
+    y la url de la imagen (para identificarlo en storage)
+    id y url identifiacores propios de cada archivo en la base de datos
+    */
+    this.servicioCrud.eliminarProducto(this.productoSeleccionado.idProducto, this.productoSeleccionado.imagen)
     .then(respuesta => {
       alert("Se ha podido eliminar con éxito.");
     })
@@ -112,31 +117,74 @@ export class TableComponent {
       alert("Ha ocurrido un error al eliminar un producto: \n"+error);
     })
   }
-  // editar productos
-  editarProducto () {
-    let datos: Producto = {
-      //solo idProducto no se modifica por el usuario
-      Idproducto: this.productoSeleccionado.Idproducto,
-      /*los demas atributos reciben nueva informacion desde el 
-      formulario */ 
-      nombre: this.producto.value.nombre!,
-      precio: this.producto.value.precio!,
-      descripcion: this.producto.value.descripcion!,
-      imagen: this.producto.value.imagen!,
-      alt: this.producto.value.alt!
+  // EDITAR PRODUCTOS
+  // Se envía y llama al momento que tocamos botón "Editar" de la tabla
+  mostrarEditar(productoSeleccionado: Producto) {
+    this.productoSeleccionado = productoSeleccionado;
+    /*
+      Toma los valores del producto seleccionado y los va a
+      autocompletar en el formulario del modal (menos el ID)
+    */
+    this.producto.setValue({
+      nombre: productoSeleccionado.nombre,
+      precio: productoSeleccionado.precio,
+      descripcion: productoSeleccionado.descripcion,
+      categoria: productoSeleccionado.categoria,
+      imagen: productoSeleccionado.imagen,
+      alt: productoSeleccionado.alt
+    })
+  }
 
+  // VINCULA A BOTÓN "editarProducto" del modal de "Editar"
+  editarProducto() {
+    let datos: Producto = {
+      // Solo idProducto no se modifica por el usuario
+      idProducto: this.productoSeleccionado.idProducto,
+      /* Los demás atributos reciben nueva información/ 
+      valor desde el formulario */
+      nombre: this.producto.seleccionado.nombre!,
+      precio: this.producto.seleccionado.precio!,
+      descripcion: this.producto.seleccionado.descripcion!,
+      categoria: this.producto.seleccionado.categoria!,
+      imagen: this.productoSeleccionado.imagen!,
+      alt: this.producto.seleccionado.alt!
+    }
+    // verificamos si el usuario ingresa o no una nueva imagen
+    if (this.imagen) {
+      this.servicioCrud.subirImagen(this.nombre.imagen, this.imagen, "productos")
+      .then(resp => {
+        this.servicioCrud.obtenerUrlImagen(resp)
+        .then(url => {
+          datos.imagen = url; // actualizamos url de la imagen en los datos del formulario
+
+          this.actualizarProducto(datos); // actualizamos los datos
+
+          this.producto.reset(); // vaciar las casillas del formulario
+        }}
+
+        )
+        .catch(error => {
+          alert("hubo un problema al subir la imagen >:v \n"+error);
+
+          this.producto.reset();
+        })
+        }
+      }else{
+      this.actualizarProducto(datos);
+      }
+        
+      }
+      actualizarProducto (datos: producto){}
+      // Enviamos al método el id del producto seleccionado y los datos actualizados
+    this.servicioCrud.modificarProducto(this.productoSeleccionado.idProducto, datos)
+    .then(producto => {
+      alert("El producto se ha modificado con éxito.");
+    })
+    .catch(error => {
+      alert("Hubo un problema al modificar el producto: \n" + error);
+    })
     }
 
-    this.servicioCrud.modificarProducto(this.productoSeleccionado.Idproducto, datos)
-    .then(producto =>{
-      alert("el producto se ha modificado con exito.");
-    })
-    .catch (error => {
-   alert ("hubo un problema al modificar el producto: ")
-    });
     
-  }
   
-}
-// editar productos
 
