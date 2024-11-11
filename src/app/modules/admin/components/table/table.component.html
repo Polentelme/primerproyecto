@@ -8,6 +8,7 @@
             <th scope="col">Precio</th>
             <th scope="col">Descripción</th>
             <th scope="col">Categoría</th>
+            <th scope="col">Stock</th> 
             <th scope="col">Acciones</th>
         </tr>
     </thead>
@@ -23,15 +24,15 @@
             <td>{{producto.precio}}</td>
             <td>{{producto.descripcion}}</td>
             <td>{{producto.categoria}}</td>
+            <td> {{producto.stock}}</td>
 
             <!-- ACCIONES -->
             <td>
                 <button id="btn-edit" title="Editar" type="button" class="btn btn-outline-warning"
-                data-bs-toggle="modal" data-bs-target="#agregarProducto" (click)="agregarProducto(producto)">
+                data-bs-toggle="modal" data-bs-target="#agregarProducto" (click)="editarProducto(producto)">
                     <mat-icon>edit</mat-icon>
                 </button>
-            </td>
-            <td>
+            
                 <button id="btn-delete" title="Eliminar" type="button" class="btn btn-outline-danger" 
                 data-bs-toggle="modal" data-bs-target="#eliminarProducto" (click)="mostrarBorrar(producto)">
                     <mat-icon>delete</mat-icon>

@@ -24,7 +24,7 @@ usuarios: any;
     nombre: '',
     apellido: '',
     email: '',
-    rol: '',
+    rol: 'usuario',
     password: ''
 
     }
