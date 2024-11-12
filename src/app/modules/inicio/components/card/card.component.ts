@@ -35,3 +35,10 @@ export class CardComponent {
   }
 
 }
+ agregarProducto (info :producto) {
+  this.productoAgregado.emit(info);
+
+  this.compraVisible = true
+
+  const 
+ }
